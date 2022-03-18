@@ -47,8 +47,18 @@ public class OpcionesMenu extends javax.swing.JFrame {
         });
 
         btnVerClases.setText("Ver Clases");
+        btnVerClases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerClasesActionPerformed(evt);
+            }
+        });
 
         btnCentroCalificaciones.setText("Ir a Centro de Calificaciones");
+        btnCentroCalificaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCentroCalificacionesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,7 +128,6 @@ public class OpcionesMenu extends javax.swing.JFrame {
             //Si dice que si, se agrega la clase
             //Agregar clase
         }
-        
     }//GEN-LAST:event_btnCrearNuevaClaseActionPerformed
 
     private void btnCrearNuevaPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearNuevaPreguntaActionPerformed
@@ -127,9 +136,18 @@ public class OpcionesMenu extends javax.swing.JFrame {
         cp.setVisible(true);
     }//GEN-LAST:event_btnCrearNuevaPreguntaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnVerClasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerClasesActionPerformed
+        // TODO add your handling code here:
+        verClases vc = new verClases();
+        vc.setVisible(true);
+    }//GEN-LAST:event_btnVerClasesActionPerformed
+
+    private void btnCentroCalificacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCentroCalificacionesActionPerformed
+        // TODO add your handling code here:
+        CentroCalificaciones cc = new CentroCalificaciones();
+        cc.setVisible(true);
+    }//GEN-LAST:event_btnCentroCalificacionesActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

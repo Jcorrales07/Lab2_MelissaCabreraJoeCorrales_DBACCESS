@@ -106,11 +106,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver Clases"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerClasesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCentroCalificaciones">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ir a Centro de Calificaciones"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCentroCalificacionesActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
