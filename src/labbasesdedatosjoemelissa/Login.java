@@ -1,5 +1,9 @@
 package labbasesdedatosjoemelissa;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Login extends javax.swing.JFrame {
 
     public Login() {
@@ -121,9 +125,13 @@ public class Login extends javax.swing.JFrame {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // TODO add your handling code here:
-        RegistroForm r = new RegistroForm();
-        r.setVisible(true);
-        
+        RegistroForm r;
+        try {
+            r = new RegistroForm();
+            r.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
