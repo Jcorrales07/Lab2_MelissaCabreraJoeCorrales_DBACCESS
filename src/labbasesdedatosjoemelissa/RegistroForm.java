@@ -20,9 +20,8 @@ public class RegistroForm extends javax.swing.JFrame {
 
     //Funcion para iniciar la base de datos
     public void initBaseDatos() throws SQLException {
-        bd = new BaseDatos("BDUniversidad.accdb"); // ruta o nombre de la Base de datos...
-        //...En este caso puse mi base de datos en la raiz de mi carpeta del proyecto para que se pueda acceder facilmente
-        conectarseBD(); //Nos conectamos
+        bd = new BaseDatos("BDUniversidad.accdb"); 
+        conectarseBD(); 
     }
     
     public void conectarseBD() throws SQLException {

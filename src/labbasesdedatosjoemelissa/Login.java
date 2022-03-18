@@ -1,13 +1,30 @@
 package labbasesdedatosjoemelissa;
 
+import Clases.BaseDatos;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Login extends javax.swing.JFrame {
-
-    public Login() {
+    BaseDatos bd;
+    
+    public Login() throws SQLException {
         initComponents();
+        initBaseDatos();
+    }
+    
+    public void initBaseDatos() throws SQLException {
+        bd = new Clases.BaseDatos("BDUniversidad.accdb"); 
+        conectarseBD(); 
+    }
+    
+    public void conectarseBD() throws SQLException {
+        bd.conectar(); 
+    }
+    
+    public void desconectarseBD() throws SQLException {
+        bd.desconectar();
     }
 
     @SuppressWarnings("unchecked")
@@ -136,13 +153,41 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        String admin = "admin";
+        String contraAdmin = "contraAdmin";
+        
         String usuario = txtUsername.getText();
         String password = txtPassword.getText();
         
         //Si entra el admin
-//        if() {
-//            
-//        }
+        if(usuario.equals(admin) && password.equals(contraAdmin)) {
+            OpcionesMenu om = new OpcionesMenu();
+            om.setVisible(true);
+        }
+        
+        try {
+            conectarseBD();
+            
+            bd.query.execute("SELECT Usuario, Contrasena FROM Alumnos");
+            ResultSet rs = bd.query.getResultSet();
+            
+            boolean existe = false;
+//            while(rs.next()) {
+//                String user = rs.getString(2);
+//                String contra = rs.getString(3);
+//                if(user.equals(usuario) && contra.equals(password)) {
+//                    existe = true;
+//                    break; 
+//                }
+//            }
+            
+            if(existe) {
+                OpcionesMenuAlumno oma = new OpcionesMenuAlumno();
+                oma.setVisible(true);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -175,7 +220,11 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                try {
+                    new Login().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
