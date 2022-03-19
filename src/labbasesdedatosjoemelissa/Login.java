@@ -1,13 +1,16 @@
 package labbasesdedatosjoemelissa;
 
 import Clases.BaseDatos;
+import clases.Alumno;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Login extends javax.swing.JFrame {
     BaseDatos bd;
+    static ArrayList<Alumno> alumnos = new ArrayList<>();
     
     public Login() throws SQLException {
         initComponents();
@@ -27,6 +30,29 @@ public class Login extends javax.swing.JFrame {
         bd.desconectar();
     }
 
+    public void llenarArrayListAlumnos() throws SQLException {
+        bd.query.execute("SELECT * FROM Alumnos");
+        ResultSet rs = bd.query.getResultSet();
+        
+        while(rs.next()) {
+            int nCuenta = rs.getInt(2);
+            String nombre = rs.getString(1);
+            String usuario = rs.getString(5);
+            String contra = rs.getString(3);
+            String carrera = rs.getString(4);
+            
+//            String nombre = rs.getString(2);
+//            String usuario = rs.getString(3);
+//            String contra = rs.getString(4);
+//            String carrera = rs.getString(5);
+            Alumno a = new Alumno(nCuenta, nombre, usuario, contra, carrera);
+            System.out.println(a);
+            alumnos.add(a);
+        }
+        
+        System.out.println("ArrayList Lleno!");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -166,30 +192,28 @@ public class Login extends javax.swing.JFrame {
         }
         
         try {
-            conectarseBD();
             
-            bd.query.execute("SELECT Usuario, Contrasena FROM Alumnos");
-            ResultSet rs = bd.query.getResultSet();
-            
-            boolean existe = false;
-//            while(rs.next()) {
-//                String user = rs.getString(2);
-//                String contra = rs.getString(3);
-//                if(user.equals(usuario) && contra.equals(password)) {
-//                    existe = true;
-//                    break; 
-//                }
-//            }
+            llenarArrayListAlumnos();
+            boolean existe = buscarUsuario(usuario, password);
             
             if(existe) {
                 OpcionesMenuAlumno oma = new OpcionesMenuAlumno();
                 oma.setVisible(true);
-            }
+            } else System.out.println("No existe perrin");
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    public boolean buscarUsuario(String user, String contra) {
+        for(Alumno a : alumnos) {
+            if(a.getUsuario().equals(user) && a.getContra().equals(contra)) {
+                return true;
+            } 
+        }
+        return false;
+    }
+    
     /**
      * @param args the command line arguments
      */
